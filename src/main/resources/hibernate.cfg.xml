@@ -17,6 +17,8 @@
     <property name="connection.pool_size">0</property>
     <property name="current_session_context_class">thread</property>
  
-    <mapping class=""/>
+    <mapping class="mpr.java.project.model.Hotel"/>
+    <mapping class="mpr.java.project.model.Guest"/>
+    <mapping class="mpr.java.project.model.Reservation"/>
   </session-factory>
 </hibernate-configuration>
