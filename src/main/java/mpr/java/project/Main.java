@@ -41,7 +41,7 @@ public class Main {
         guests.add(guest2);
         
         Guest guest3 = new Guest();
-        guest3.setName("Wojciech");
+        guest3.setName("Piotr");
         guest3.setSurname("Wojmos");
         guest3.setPhone("890657980");
         guest3.setHotel(hotel);
@@ -83,5 +83,26 @@ public class Main {
         
         tx.commit();
         s.close();
+        
+        System.out.println("\nSzukaj po imieniu\n");
+        List<Guest> guestsResultList = Hotel.searchByName("Piotr");
+        
+        for(Guest guest : guestsResultList) {
+            System.out.println(guest.getName() + " " + guest.getSurname() + " tel." + guest.getPhone());
+        }
+        
+        System.out.println("\nSzukaj po telefonie\n");
+        guestsResultList = Hotel.searchByPhone("324657980");
+        
+        for(Guest guest : guestsResultList) {
+            System.out.println(guest.getName() + " " + guest.getSurname() + " tel." + guest.getPhone());
+        }
+        
+        System.out.println("\nSzukaj po nazwisku\n");
+        guestsResultList = Hotel.searchBySurname("Wojmos");
+        
+        for(Guest guest : guestsResultList) {
+            System.out.println(guest.getName() + " " + guest.getSurname() + " tel." + guest.getPhone());
+        }
     }
 }

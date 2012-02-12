@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import org.hsql.db.HibernateUtil;
 
 @Entity
 public class Hotel implements Serializable {
@@ -59,5 +64,44 @@ public class Hotel implements Serializable {
 
     public void setGuests(List<Guest> guests) {
         this.guests = guests;
+    }
+    
+    public static List<Guest> searchByName(String name) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(Guest.class);
+        criteria.add(Restrictions.eq("name", name));
+        List<Guest> guestsResult = criteria.list();
+        
+        transaction.commit();
+        
+        return guestsResult;
+    }
+    
+    public static List<Guest> searchByPhone (String phone){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(Guest.class);
+        criteria.add(Restrictions.eq("phone", phone));
+        List<Guest> guestsResult = criteria.list();
+        
+        transaction.commit();
+        
+        return guestsResult;
+    }
+    
+    public static List<Guest> searchBySurname(String surname) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(Guest.class);
+        criteria.add(Restrictions.eq("surname", surname));
+        List<Guest> guestsResult = criteria.list();
+        
+        transaction.commit();
+        
+        return guestsResult;
     }
 }
